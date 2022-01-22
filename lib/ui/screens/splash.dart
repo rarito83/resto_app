@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
-import 'home_resto.dart';
+import 'package:resto_app/ui/screens/home_resto_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const routeName = '/splashScreen';
+  static const routeName = '/splash';
 
   @override
-  _SplashScreen createState() => _SplashScreen();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreen extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -21,7 +20,7 @@ class _SplashScreen extends State<SplashScreen> {
   splashScreen() {
     var duration = const Duration(seconds: 3);
     return Timer(duration, () {
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      Navigator.pushReplacementNamed(context, HomeRestoScreen.routeName);
     });
   }
 
