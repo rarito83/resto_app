@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:resto_app/model/restaurant.dart';
+import 'package:resto_app/data/model/restaurant.dart';
+import 'package:resto_app/data/source/api_service.dart';
 
-class RestoDetailScreen extends StatelessWidget {
-  static const routeName = "/detail_resto";
+class DetailRestoScreen extends StatelessWidget {
+  static const routeName = '/detail_screen';
+
   final Restaurant restaurant;
-
-  const RestoDetailScreen({required this.restaurant});
+  DetailRestoScreen({required this.restaurant});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(restaurant.name),
+        title: const Text('Detail Restaurant'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -20,7 +21,7 @@ class RestoDetailScreen extends StatelessWidget {
               child: Hero(
                   tag: restaurant.pictureId,
                   child: Image.network(
-                    restaurant.pictureId,
+                    ApiService.imageUrl + restaurant.pictureId,
                     width: 450,
                     height: 300,
                     fit: BoxFit.cover,
@@ -51,26 +52,26 @@ class RestoDetailScreen extends StatelessWidget {
                   const Divider(color: Colors.grey),
                   const Text("Makanan:"),
                   const SizedBox(height: 10.0),
-                  ListView.builder(
-                    itemCount: restaurant.menus.foods.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Text(restaurant.menus.foods[index].name);
-                    },
-                  ),
-                  const Divider(color: Colors.grey),
-                  const Text("Minuman:"),
-                  const SizedBox(height: 10.0),
-                  ListView.builder(
-                    itemCount: restaurant.menus.drinks.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Text(restaurant.menus.drinks[index].name);
-                    },
-                  ),
-                  const SizedBox(height: 10.0),
+                  // ListView.builder(
+                  //   itemCount: restaurant.menus.foods.length,
+                  //   shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   itemBuilder: (context, index) {
+                  //     return Text(restaurant.menus.foods[index].name);
+                  //   },
+                  // ),
+                  // const Divider(color: Colors.grey),
+                  // const Text("Minuman:"),
+                  // const SizedBox(height: 10.0),
+                  // ListView.builder(
+                  //   itemCount: restaurant.menus.drinks.length,
+                  //   shrinkWrap: true,
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   itemBuilder: (context, index) {
+                  //     return Text(restaurant.menus.drinks[index].name);
+                  //   },
+                  // ),
+                  // const SizedBox(height: 10.0),
                 ],
               ),
             ),
