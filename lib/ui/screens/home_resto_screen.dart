@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:resto_app/common/result_state.dart';
 import 'package:resto_app/data/model/restaurant.dart';
 import 'package:resto_app/provider/resto_provider.dart';
 import 'package:resto_app/ui/screens/detail_resto_screen.dart';
+import 'package:resto_app/ui/screens/search_resto_screen.dart';
 import 'package:resto_app/ui/widgets/list_local_resto.dart';
 
 class HomeRestoScreen extends StatelessWidget {
@@ -13,6 +15,15 @@ class HomeRestoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Resto App"),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SearchRestoScreen.routeName);
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: Consumer<RestoProvider>(
         builder: (context, value, _) {

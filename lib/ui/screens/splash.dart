@@ -6,6 +6,8 @@ import 'package:resto_app/ui/screens/home_resto_screen.dart';
 class SplashScreen extends StatefulWidget {
   static const routeName = '/splash';
 
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

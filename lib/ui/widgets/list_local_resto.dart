@@ -49,7 +49,7 @@ Widget localList(BuildContext context, Restaurant restaurant) {
               const SizedBox(height: 24.0),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star_border,
                     color: Colors.amber,
                   ),
@@ -58,7 +58,7 @@ Widget localList(BuildContext context, Restaurant restaurant) {
                   ),
                   Text(
                     restaurant.rating.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18.0,
                     ),

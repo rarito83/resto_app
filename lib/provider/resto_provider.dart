@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:resto_app/common/result_state.dart';
 import 'package:resto_app/data/source/api_service.dart';
-
-enum ResultState { Loading, NoData, HasData, Error }
 
 class RestoProvider with ChangeNotifier {
   final ApiService apiService;
 
   RestoProvider({required this.apiService}) {
-    _fetchDataAllResto();
+    fetchDataAllResto();
   }
 
   late dynamic _restoResponse;
@@ -18,7 +17,7 @@ class RestoProvider with ChangeNotifier {
   ResultState get state => _resultState;
   String get message => _msg;
 
-  Future<dynamic> _fetchDataAllResto() async {
+  Future<dynamic> fetchDataAllResto() async {
     try {
       _resultState = ResultState.Loading;
       notifyListeners();

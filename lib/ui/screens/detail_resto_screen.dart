@@ -52,26 +52,6 @@ class DetailRestoScreen extends StatelessWidget {
                   const Divider(color: Colors.grey),
                   const Text("Makanan:"),
                   const SizedBox(height: 10.0),
-                  // ListView.builder(
-                  //   itemCount: restaurant.menus.foods.length,
-                  //   shrinkWrap: true,
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   itemBuilder: (context, index) {
-                  //     return Text(restaurant.menus.foods[index].name);
-                  //   },
-                  // ),
-                  // const Divider(color: Colors.grey),
-                  // const Text("Minuman:"),
-                  // const SizedBox(height: 10.0),
-                  // ListView.builder(
-                  //   itemCount: restaurant.menus.drinks.length,
-                  //   shrinkWrap: true,
-                  //   physics: const NeverScrollableScrollPhysics(),
-                  //   itemBuilder: (context, index) {
-                  //     return Text(restaurant.menus.drinks[index].name);
-                  //   },
-                  // ),
-                  // const SizedBox(height: 10.0),
                 ],
               ),
             ),

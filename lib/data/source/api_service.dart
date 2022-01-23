@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:resto_app/common/constant.dart';
 import 'package:resto_app/data/model/restaurant.dart';
 import 'package:resto_app/data/model/resto_response.dart';
+import 'package:resto_app/data/model/search_restaurant.dart';
 
 class ApiService {
   static const String baseUrl = 'https://restaurant-api.dicoding.dev/';
@@ -15,7 +16,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return RestoResponse.fromJson(json.decode(response.body));
     } else {
-      throw Exception(response.toString());
+      throw Exception('Failed to load data');
     }
   }
 
@@ -26,18 +27,18 @@ class ApiService {
     if (response.statusCode == 200) {
       return Restaurant.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception(response.toString());
+      throw Exception('Failed to load data');
     }
   }
 
-  Future<RestoResponse> searchRestaurant(String query) async {
+  Future<SearchRestaurant> searchRestaurant(String query) async {
     final response =
-        await http.get(Uri.parse(ConstantApp.baseUrl + "search?$query"));
+        await http.get(Uri.parse(ConstantApp.baseUrl + "search?q=$query"));
 
     if (response.statusCode == 200) {
-      return RestoResponse.fromJson(jsonDecode(response.body));
+      return SearchRestaurant.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception(response.toString());
+      throw Exception('Failed to load data');
     }
   }
 }
