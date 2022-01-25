@@ -24,7 +24,7 @@ class ApiService {
     await http.get(Uri.parse(ConstantApp.baseUrl + "detail/" + id));
     if (response.statusCode == 200) {
       print('Detail response -> ${json.decode(response.body)}');
-      return RestoResponse.fromJson(jsonDecode(response.body));
+      return RestoResponse.detailFromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load data');
     }

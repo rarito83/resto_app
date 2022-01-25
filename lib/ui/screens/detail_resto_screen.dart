@@ -40,9 +40,9 @@ class DetailRestoScreen extends StatelessWidget {
                 children: [
                   ClipRRect(
                     child: Hero(
-                        tag: value.resto.id,
+                        tag: restaurant.pictureId,
                         child: Image.network(
-                          ApiService.imageUrl + value.resto.id,
+                          ApiService.imageUrl + restaurant.pictureId,
                           width: 450,
                           height: 300,
                           fit: BoxFit.cover,
