@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:resto_app/data/model/restaurant.dart';
-import 'package:resto_app/provider/search_provider.dart';
 import 'package:resto_app/ui/screens/search_resto_screen.dart';
-import '../data/source/api_service.dart';
-import '../provider/resto_provider.dart';
+
 import '../ui/screens/detail_resto_screen.dart';
 import '../ui/screens/home_resto_screen.dart';
 import '../ui/screens/splash.dart';
@@ -14,33 +11,23 @@ void main() => runApp(RestoApp());
 class RestoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => RestoProvider(apiService: ApiService()),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => SearchProvider(apiService: ApiService()),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Resto App',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        debugShowCheckedModeBanner: false,
-        initialRoute: SplashScreen.routeName,
-        routes: {
-          SplashScreen.routeName: (context) => const SplashScreen(),
-          HomeRestoScreen.routeName: (context) => HomeRestoScreen(),
-          SearchRestoScreen.routeName: (context) => SearchRestoScreen(),
-          DetailRestoScreen.routeName: (context) => DetailRestoScreen(
-                restaurant:
-                    ModalRoute.of(context)?.settings.arguments as Restaurant,
-              ),
-        },
+    return MaterialApp(
+      title: 'Resto App',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
+      initialRoute: SplashScreen.routeName,
+      routes: {
+        SplashScreen.routeName: (context) => const SplashScreen(),
+        HomeRestoScreen.routeName: (context) => HomeRestoScreen(),
+        SearchRestoScreen.routeName: (context) => SearchRestoScreen(),
+        DetailRestoScreen.routeName: (context) => DetailRestoScreen(
+          restaurant:
+          ModalRoute.of(context)?.settings.arguments as Restaurant,
+        ),
+      },
     );
   }
 }

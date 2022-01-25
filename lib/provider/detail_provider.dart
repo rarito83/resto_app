@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:resto_app/common/result_state.dart';
 import 'package:resto_app/data/source/api_service.dart';
 
-class RestoProvider with ChangeNotifier {
+class DetailProvider extends ChangeNotifier {
   final ApiService apiService;
+  final String id;
 
-  RestoProvider({required this.apiService}) {
-    fetchDataAllResto();
+  DetailProvider({required this.apiService, required this.id}) {
+    fetchDetailResto(id);
   }
 
   late ResultState _resultState;
 
   ResultState get state => _resultState;
 
-  late dynamic _restoResponse;
+  dynamic _restoResponse;
 
   dynamic get resto => _restoResponse;
 
@@ -21,21 +22,21 @@ class RestoProvider with ChangeNotifier {
 
   String get message => _msg;
 
-  Future<dynamic> fetchDataAllResto() async {
+  Future<dynamic> fetchDetailResto(String id) async {
     try {
       _resultState = ResultState.Loading;
       notifyListeners();
 
-      final dataRestaurant = await apiService.getRestaurantData();
+      final data = await apiService.getDetailRestaurant(id);
 
-      if (dataRestaurant.restaurants!.isEmpty) {
+      if (data.restaurant == null) {
         _resultState = ResultState.NoData;
         notifyListeners();
         return _msg = 'Failed to load data...';
       } else {
         _resultState = ResultState.HasData;
         notifyListeners();
-        return _restoResponse = dataRestaurant.restaurants;
+        return _restoResponse = data.restaurant!;
       }
     } catch (e) {
       _resultState = ResultState.Error;

@@ -9,15 +9,19 @@ class SearchProvider extends ChangeNotifier {
   SearchProvider({required this.apiService});
 
   SearchRestaurant? _restoSearch;
+
   SearchRestaurant? get restoSearch => _restoSearch;
 
   ResultState? _resultState;
+
   ResultState? get state => _resultState;
 
   String _msg = '';
+
   String get message => _msg;
 
   String _search = '';
+
   String get search => _search;
 
   set searchResto(String query) {

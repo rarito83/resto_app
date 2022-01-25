@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:resto_app/common/constant.dart';
-import 'package:resto_app/data/model/restaurant.dart';
 import 'package:resto_app/data/model/resto_response.dart';
 import 'package:resto_app/data/model/search_restaurant.dart';
 
@@ -20,12 +19,12 @@ class ApiService {
     }
   }
 
-  Future<Restaurant> getDetailRestaurant(String id) async {
+  Future<RestoResponse> getDetailRestaurant(String id) async {
     final response =
-        await http.get(Uri.parse(ConstantApp.baseUrl + "detail/" + "id"));
-
+    await http.get(Uri.parse(ConstantApp.baseUrl + "detail/" + id));
     if (response.statusCode == 200) {
-      return Restaurant.fromJson(jsonDecode(response.body));
+      print('Detail response -> ${json.decode(response.body)}');
+      return RestoResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load data');
     }
@@ -33,7 +32,7 @@ class ApiService {
 
   Future<SearchRestaurant> searchRestaurant(String query) async {
     final response =
-        await http.get(Uri.parse(ConstantApp.baseUrl + "search?q=$query"));
+    await http.get(Uri.parse(ConstantApp.baseUrl + "search?q=$query"));
 
     if (response.statusCode == 200) {
       return SearchRestaurant.fromJson(jsonDecode(response.body));
