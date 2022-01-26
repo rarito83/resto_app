@@ -23,22 +23,22 @@ class RestoProvider with ChangeNotifier {
 
   Future<dynamic> fetchDataAllResto() async {
     try {
-      _resultState = ResultState.Loading;
+      _resultState = ResultState.loading;
       notifyListeners();
 
       final dataRestaurant = await apiService.getRestaurantData();
 
       if (dataRestaurant.restaurants!.isEmpty) {
-        _resultState = ResultState.NoData;
+        _resultState = ResultState.noData;
         notifyListeners();
         return _msg = 'Failed to load data...';
       } else {
-        _resultState = ResultState.HasData;
+        _resultState = ResultState.hasData;
         notifyListeners();
         return _restoResponse = dataRestaurant.restaurants;
       }
     } catch (e) {
-      _resultState = ResultState.Error;
+      _resultState = ResultState.error;
       notifyListeners();
       return _msg = 'Something Wrong.. $e';
     }

@@ -24,22 +24,22 @@ class DetailProvider extends ChangeNotifier {
 
   Future<dynamic> fetchDetailResto(String id) async {
     try {
-      _resultState = ResultState.Loading;
+      _resultState = ResultState.loading;
       notifyListeners();
 
       final data = await apiService.getDetailRestaurant(id);
 
-      if (data.restaurant == null) {
-        _resultState = ResultState.NoData;
+      if (data == null) {
+        _resultState = ResultState.noData;
         notifyListeners();
         return _msg = 'Failed to load data...';
       } else {
-        _resultState = ResultState.HasData;
+        _resultState = ResultState.hasData;
         notifyListeners();
-        return _restoResponse = data.restaurant!;
+        return _restoResponse = data;
       }
     } catch (e) {
-      _resultState = ResultState.Error;
+      _resultState = ResultState.error;
       notifyListeners();
       return _msg = 'Something Wrong.. $e';
     }

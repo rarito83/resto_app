@@ -29,7 +29,7 @@ class HomeRestoScreen extends StatelessWidget {
         ),
         body: Consumer<RestoProvider>(
           builder: (context, value, _) {
-            if (value.state == ResultState.HasData) {
+            if (value.state == ResultState.hasData) {
               final List<Restaurant> restaurants = value.resto;
               return ListView.builder(
                 itemCount: value.resto.length,
@@ -39,7 +39,7 @@ class HomeRestoScreen extends StatelessWidget {
                   );
                 },
               );
-            } else if (value.state == ResultState.Error) {
+            } else if (value.state == ResultState.error) {
               return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

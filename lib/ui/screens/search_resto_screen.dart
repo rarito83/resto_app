@@ -52,7 +52,7 @@ class SearchRestoScreen extends StatelessWidget {
                 Expanded(
                   child: Consumer<SearchProvider>(
                     builder: (context, value, _) {
-                      if (value.state == ResultState.HasData) {
+                      if (value.state == ResultState.hasData) {
                         final List<Restaurant> data =
                             value.restoSearch!.restaurants;
                         return ListView.builder(
@@ -139,7 +139,7 @@ class SearchRestoScreen extends StatelessWidget {
                             );
                           },
                         );
-                      } else if (value.state == ResultState.Error) {
+                      } else if (value.state == ResultState.error) {
                         return Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +148,7 @@ class SearchRestoScreen extends StatelessWidget {
                                     "Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
                               ],
                             ));
-                      } else if (value.state == ResultState.Loading) {
+                      } else if (value.state == ResultState.loading) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
                         return const Icon(Icons.search_outlined, size: 60);

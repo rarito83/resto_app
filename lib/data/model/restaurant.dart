@@ -1,3 +1,5 @@
+import 'package:resto_app/data/model/review.dart';
+
 class Restaurant {
   Restaurant({
     required this.id,
@@ -6,12 +8,6 @@ class Restaurant {
     required this.pictureId,
     required this.city,
     required this.rating,
-    this.foods,
-    this.drinks,
-    this.menus,
-    this.categories,
-    this.address,
-    this.reviews,
   });
 
   String id;
@@ -20,37 +16,22 @@ class Restaurant {
   String pictureId;
   String city;
   double rating;
-  String? foods;
-  String? drinks;
-  Map? menus;
-  List? categories;
-  String? address;
-  List? reviews;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
-    id: json["id"],
-    name: json["name"],
-    description: json["description"],
-    pictureId: json["pictureId"],
-    city: json["city"],
-    rating: json["rating"].toDouble(),
-  );
-
-  factory Restaurant.detailFromJson(Map<String, dynamic> json) => Restaurant(
-    id: json["id"],
-    name: json["name"],
-    description: json["description"],
-    pictureId: json["pictureId"],
-    city: json["city"],
-    rating: json["rating"].toDouble(),
-  );
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        pictureId: json["pictureId"],
+        city: json["city"],
+        rating: json["rating"].toDouble(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "description": description,
-    "pictureId": pictureId,
-    "city": city,
-    "rating": rating,
-  };
+        "id": id,
+        "name": name,
+        "description": description,
+        "pictureId": pictureId,
+        "city": city,
+        "rating": rating,
+      };
 }
