@@ -23,18 +23,18 @@ class DetailRestoScreen extends StatelessWidget {
           centerTitle: true,
         ),
         body: Consumer<DetailProvider>(builder: (context, value, _) {
-          if (value.state == ResultState.Loading) {
+          if (value.state == ResultState.loading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (value.state == ResultState.NoData) {
+          } else if (value.state == ResultState.noData) {
             return Center(
               child: Text(value.state.toString()),
             );
-          } else if (value.state == ResultState.Error) {
+          } else if (value.state == ResultState.error) {
             return const Center(
               child:
               Text("Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
             );
-          } else if (value.state == ResultState.HasData) {
+          } else if (value.state == ResultState.hasData) {
             return SingleChildScrollView(
               child: Column(
                 children: [

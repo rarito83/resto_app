@@ -32,20 +32,20 @@ class SearchProvider extends ChangeNotifier {
 
   Future<dynamic> getRestaurantSearch(String query) async {
     try {
-      _resultState = ResultState.Loading;
+      _resultState = ResultState.loading;
       notifyListeners();
       final restaurantSearch = await apiService.searchRestaurant(query);
       if (restaurantSearch.restaurants.isEmpty) {
-        _resultState = ResultState.NoData;
+        _resultState = ResultState.noData;
         notifyListeners();
         return _msg = 'Tidak ditemukan';
       } else {
-        _resultState = ResultState.HasData;
+        _resultState = ResultState.hasData;
         notifyListeners();
         return _restoSearch = restaurantSearch;
       }
     } catch (e) {
-      _resultState = ResultState.Error;
+      _resultState = ResultState.error;
       notifyListeners();
       return _msg = 'Something Wrong.. $e';
     }
