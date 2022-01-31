@@ -42,18 +42,18 @@ class HomeRestoScreen extends StatelessWidget {
             } else if (value.state == ResultState.error) {
               return Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                          "Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
-                      ElevatedButton(
-                        onPressed: () {
-                          value.fetchDataAllResto();
-                        },
-                        child: const Text('Refresh'),
-                      ),
-                    ],
-                  ));
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                      "Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
+                  ElevatedButton(
+                    onPressed: () {
+                      value.fetchDataAllResto();
+                    },
+                    child: const Text('Refresh'),
+                  ),
+                ],
+              ));
             } else {
               return const Center(child: CircularProgressIndicator());
             }

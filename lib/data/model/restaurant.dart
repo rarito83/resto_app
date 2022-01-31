@@ -1,5 +1,3 @@
-import 'package:resto_app/data/model/review.dart';
-
 class Restaurant {
   Restaurant({
     required this.id,
