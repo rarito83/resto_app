@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:resto_app/common/result_state.dart';
-import 'package:resto_app/data/model/restaurant.dart';
+import 'package:resto_app/common/utils/notification_helper.dart';
 import 'package:resto_app/data/source/resto_database.dart';
 import 'package:resto_app/provider/db_provider.dart';
-import 'package:resto_app/provider/resto_provider.dart';
+import 'package:resto_app/ui/screens/detail_resto_screen.dart';
+import 'package:resto_app/ui/screens/resto_screen.dart';
 import 'package:resto_app/ui/screens/search_resto_screen.dart';
 import 'package:resto_app/ui/screens/setting_screen.dart';
-import 'package:resto_app/ui/widgets/list_local_resto.dart';
 
 import 'favorite_screen.dart';
 
@@ -23,9 +21,10 @@ class _HomeRestoScreenState extends State<HomeRestoScreen> {
       DbProvider(restoDatabase: RestoDatabase());
 
   late int navIndex;
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   List<Widget> _listBar = [
-    HomeRestoScreen(),
+    RestoScreen(),
     FavoriteScreen(
       dbProvider: databaseProvider,
     ),
@@ -34,6 +33,8 @@ class _HomeRestoScreenState extends State<HomeRestoScreen> {
 
   @override
   void initState() {
+    _notificationHelper
+        .configureSelectNotificationSubject(context, DetailRestoScreen.routeName);
     navIndex = 0;
     super.initState();
   }
@@ -41,50 +42,7 @@ class _HomeRestoScreenState extends State<HomeRestoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Resto App"),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, SearchRestoScreen.routeName);
-            },
-            icon: const Icon(Icons.search),
-          ),
-        ],
-      ),
-      body: Consumer<RestoProvider>(
-        builder: (context, value, _) {
-          if (value.state == ResultState.hasData) {
-            final List<Restaurant> restaurants = value.resto;
-            return ListView.builder(
-              itemCount: value.resto.length,
-              itemBuilder: (context, index) {
-                return LocalList(
-                  restaurant: restaurants[index],
-                );
-              },
-            );
-          } else if (value.state == ResultState.error) {
-            return Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                    "Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
-                ElevatedButton(
-                  onPressed: () {
-                    value.fetchDataAllResto();
-                  },
-                  child: const Text('Refresh'),
-                ),
-              ],
-            ));
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
+      body: _listBar[navIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.greenAccent,
         selectedItemColor: Colors.white,
@@ -95,7 +53,7 @@ class _HomeRestoScreenState extends State<HomeRestoScreen> {
             navIndex = value;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'home',
@@ -111,5 +69,11 @@ class _HomeRestoScreenState extends State<HomeRestoScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
   }
 }
