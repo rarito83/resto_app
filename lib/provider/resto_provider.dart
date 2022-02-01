@@ -28,7 +28,7 @@ class RestoProvider with ChangeNotifier {
 
       final dataRestaurant = await apiService.getRestaurantData();
 
-      if (dataRestaurant.restaurants!.isEmpty) {
+      if (dataRestaurant.restaurants.isEmpty) {
         _resultState = ResultState.noData;
         notifyListeners();
         return _msg = 'Failed to load data...';
