@@ -72,7 +72,7 @@ class SearchRestoScreen extends StatelessWidget {
                                               topRight: Radius.circular(10.0),
                                               bottomLeft: Radius.circular(10.0),
                                               bottomRight:
-                                              Radius.circular(10.0)),
+                                                  Radius.circular(10.0)),
                                           child: Hero(
                                             tag: data[index].pictureId,
                                             child: Image.network(
@@ -88,7 +88,7 @@ class SearchRestoScreen extends StatelessWidget {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                            CrossAxisAlignment.stretch,
                                         children: <Widget>[
                                           Text(
                                             data[index].name,
@@ -142,12 +142,12 @@ class SearchRestoScreen extends StatelessWidget {
                       } else if (value.state == ResultState.error) {
                         return Center(
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text(
-                                    "Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
-                              ],
-                            ));
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                                "Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
+                          ],
+                        ));
                       } else if (value.state == ResultState.loading) {
                         return const Center(child: CircularProgressIndicator());
                       } else {

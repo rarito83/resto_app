@@ -24,9 +24,9 @@ class RestoApp extends StatelessWidget {
         HomeRestoScreen.routeName: (context) => HomeRestoScreen(),
         SearchRestoScreen.routeName: (context) => SearchRestoScreen(),
         DetailRestoScreen.routeName: (context) => DetailRestoScreen(
-          restaurant:
-          ModalRoute.of(context)?.settings.arguments as Restaurant,
-        ),
+              restaurant:
+                  ModalRoute.of(context)?.settings.arguments as Restaurant,
+            ),
       },
     );
   }

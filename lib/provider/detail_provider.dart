@@ -29,14 +29,14 @@ class DetailProvider extends ChangeNotifier {
 
       final data = await apiService.getDetailRestaurant(id);
 
-      if (data.restaurant == null) {
+      if (data == null) {
         _resultState = ResultState.noData;
         notifyListeners();
         return _msg = 'Failed to load data...';
       } else {
         _resultState = ResultState.hasData;
         notifyListeners();
-        return _restoResponse = data.restaurant!;
+        return _restoResponse = data;
       }
     } catch (e) {
       _resultState = ResultState.error;

@@ -32,17 +32,19 @@ class DetailRestoScreen extends StatelessWidget {
           } else if (value.state == ResultState.error) {
             return const Center(
               child:
-              Text("Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
+                  Text("Jaringan Terputus!! Periksa Koneksi Internet Anda.."),
             );
           } else if (value.state == ResultState.hasData) {
+            final detail = value.resto.restaurant;
+            print("Detail ==> $detail");
             return SingleChildScrollView(
               child: Column(
                 children: [
                   ClipRRect(
                     child: Hero(
-                        tag: value.resto.id,
+                        tag: restaurant.pictureId,
                         child: Image.network(
-                          ApiService.imageUrl + value.resto.id,
+                          ApiService.imageUrl + restaurant.pictureId,
                           width: 450,
                           height: 300,
                           fit: BoxFit.cover,
@@ -54,7 +56,7 @@ class DetailRestoScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          value.resto.name,
+                          detail.name,
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -62,15 +64,37 @@ class DetailRestoScreen extends StatelessWidget {
                           ),
                         ),
                         const Divider(color: Colors.grey),
-                        Text('City: ${value.resto.city}'),
+                        Text('City: ${detail.city}'),
                         const SizedBox(height: 10.0),
-                        Text('Rating: ${value.resto.rating}'),
+                        Text('Rating: ${detail.rating}'),
                         const Divider(color: Colors.grey),
                         Text(
-                          value.resto.description,
+                          detail.description,
                           style: const TextStyle(fontSize: 16.0),
                         ),
                         const Divider(color: Colors.grey),
+                        const Text("Makanan:"),
+                        const SizedBox(height: 10.0),
+                        ListView.builder(
+                          itemCount: detail.menus.foods.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Text(detail.menus.foods[index].name);
+                          },
+                        ),
+                        const Divider(color: Colors.grey),
+                        const Text("Minuman:"),
+                        const SizedBox(height: 10.0),
+                        ListView.builder(
+                          itemCount: detail.menus.drinks.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Text(detail.menus.drinks[index].name);
+                          },
+                        ),
+                        const SizedBox(height: 10.0),
                       ],
                     ),
                   ),
