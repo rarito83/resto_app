@@ -46,6 +46,20 @@ class RestaurantDetail {
         drinks: '',
         foods: '',
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "city": city,
+        "address": address,
+        "pictureId": pictureId,
+        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "menus": menus.toJson(),
+        "rating": rating,
+        "customerReviews":
+            List<dynamic>.from(customerReviews.map((x) => x.toJson())),
+      };
 }
 
 class Category {
@@ -90,6 +104,7 @@ class Drink {
   });
 
   String name;
+
   factory Drink.fromJson(Map<String, dynamic> json) => Drink(
         name: json["name"],
       );

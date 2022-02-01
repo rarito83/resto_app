@@ -1,20 +1,17 @@
 import 'package:resto_app/data/model/restaurant.dart';
-import 'package:resto_app/data/model/restaurant_detail.dart';
 
 class RestoResponse {
   RestoResponse({
     required this.error,
     required this.message,
     this.count,
-    this.restaurants,
-    this.restaurant,
+    required this.restaurants,
   });
 
   bool error;
   String message;
   int? count;
-  List<Restaurant>? restaurants;
-  RestaurantDetail? restaurant;
+  List<Restaurant> restaurants;
 
   factory RestoResponse.fromJson(Map<String, dynamic> json) => RestoResponse(
         error: json["error"],
@@ -25,10 +22,10 @@ class RestoResponse {
         ),
       );
 
-  factory RestoResponse.detailFromJson(Map<String, dynamic> json) =>
-      RestoResponse(
-        error: json["error"],
-        message: json["message"],
-        restaurant: RestaurantDetail.detailFromJson(json["restaurant"]),
-      );
+  Map<String, dynamic> toJson() => {
+    "error": error,
+    "message": message,
+    "count": count,
+    "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
+  };
 }

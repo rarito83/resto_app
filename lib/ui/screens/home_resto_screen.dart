@@ -3,12 +3,41 @@ import 'package:provider/provider.dart';
 import 'package:resto_app/common/result_state.dart';
 import 'package:resto_app/data/model/restaurant.dart';
 import 'package:resto_app/data/source/api_service.dart';
+import 'package:resto_app/data/source/resto_database.dart';
+import 'package:resto_app/provider/db_provider.dart';
 import 'package:resto_app/provider/resto_provider.dart';
 import 'package:resto_app/ui/screens/search_resto_screen.dart';
+import 'package:resto_app/ui/screens/setting_screen.dart';
 import 'package:resto_app/ui/widgets/list_local_resto.dart';
 
-class HomeRestoScreen extends StatelessWidget {
+import 'favorite_screen.dart';
+
+class HomeRestoScreen extends StatefulWidget {
   static const routeName = '/home_screen';
+
+  @override
+  State<HomeRestoScreen> createState() => _HomeRestoScreenState();
+}
+
+class _HomeRestoScreenState extends State<HomeRestoScreen> {
+  static DbProvider databaseProvider =
+      DbProvider(restoDatabase: RestoDatabase());
+
+  late int navIndex;
+
+  List<Widget> _listBar = [
+    HomeRestoScreen(),
+    FavoriteScreen(
+      dbProvider: databaseProvider,
+    ),
+    SettingScreen(),
+  ];
+
+  @override
+  void initState() {
+    navIndex = 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +87,31 @@ class HomeRestoScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
           },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.greenAccent,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey[500],
+          currentIndex: navIndex,
+          onTap: (value) {
+            setState(() {
+              navIndex = value;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'favorite',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'setting',
+            ),
+          ],
         ),
       ),
     );
