@@ -28,14 +28,14 @@ class RestoDatabase {
           '''CREATE TABLE $_favouriteTable (
                id TEXT PRIMARY KEY,
                name TEXT, 
-               description TEXT
+               description TEXT,
                pictureId TEXT, 
                city TEXT,
-               rating NUMERIC, 
+               rating NUMERIC
              )''',
         );
       },
-      version: 2,
+      version: 3,
     );
 
     return db;
