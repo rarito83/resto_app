@@ -37,26 +37,17 @@ class DetailRestoScreen extends StatelessWidget {
                   centerTitle: true,
                   actions: [
                     IconButton(
+                      icon: Icon(
+                      Icons.favorite,
+                        color: isFavorited ? Colors.red : Colors.white,
+                      ),
                       onPressed: () {
-                        isFavorited
-                            ? IconButton(
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () =>
-                                    provider.removeFavorites(restaurant.id),
-                              )
-                            : IconButton(
-                                icon: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () =>
-                                    provider.addFavorite(restaurant),
-                              );
+                        if (isFavorited) {
+                          provider.removeFavorites(restaurant.id);
+                        } else {
+                          provider.addFavorite(restaurant);
+                        }
                       },
-                      icon: const Icon(Icons.favorite),
                     ),
                   ],
                 ),

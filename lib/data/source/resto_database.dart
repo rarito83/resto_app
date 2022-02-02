@@ -10,8 +10,7 @@ class RestoDatabase {
     _restoDatabase = this;
   }
 
-  factory RestoDatabase() =>
-      _restoDatabase ?? RestoDatabase.internal();
+  factory RestoDatabase() => _restoDatabase ?? RestoDatabase.internal();
 
   Future<Database> get database async {
     _database = await _initializeDb();
@@ -27,16 +26,16 @@ class RestoDatabase {
       onCreate: (db, version) async {
         await db.execute(
           '''CREATE TABLE $_favouriteTable (
-               id INTEGER PRIMARY KEY,
+               id TEXT PRIMARY KEY,
                name TEXT, 
-               city TEXT,
-               pictureId TEXT, 
-               rating TEXT, 
                description TEXT
+               pictureId TEXT, 
+               city TEXT,
+               rating NUMERIC, 
              )''',
         );
       },
-      version: 1,
+      version: 2,
     );
 
     return db;
